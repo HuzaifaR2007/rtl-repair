@@ -1,0 +1,4 @@
+id,bug_class,fix_correctness,format_adherence,explanation_quality,verification_quality,total_8,notes
+ex003_fsm_wrong_transition,fsm_bug,0,1,2,1,4,"Explains the bug well, but the actual fix is wrong: it uses !tick instead of transitioning on tick. Verification is cut off."
+ex011_edge_detector_blocking,blocking_vs_nonblocking,2,1,2,2,7,"Best baseline sample. Correct fix, solid explanation, useful verification, but still uses code fences and rambles a bit."
+ex015_alu_zero_flag_incomplete_comb,incomplete_combinational_logic,1,1,2,1,5,"Improves zero handling, but not with the cleanest structure. Verification gets cut off."
