@@ -1,0 +1,7 @@
+id,bug_class,fix_correctness,format_adherence,explanation_quality,verification_quality,total_8,notes
+ex003_fsm_wrong_transition,fsm_bug,2,2,2,2,8,"Targeted FSM mini-batch fixed the previous !tick failure. Correct transition on tick."
+ex011_edge_detector_blocking,blocking_vs_nonblocking,2,2,2,2,8,"Correct non-blocking fix, clean format, useful verification."
+ex015_alu_zero_flag_incomplete_comb,incomplete_combinational_logic,2,2,2,1,7,"Functionally fixes zero assignment for all op cases, but verification is broad."
+ex021_reset_missing_data_reg,reset_logic,2,2,2,2,8,"Correctly resets both data_out and valid_out with strong explanation."
+ex025_counter_mod6_wrong_terminal,counter_width_boundary,2,2,2,2,8,"Correct off-by-one fix and clean verification suggestion."
+ex027_uart_tx_fsm_data_to_stop,fsm_bug,2,1,2,2,7,"Correct DATA-to-STOP fix, but still uses markdown code fences."
