@@ -17,6 +17,7 @@ def build_prompt(example: dict) -> str:
         "- Do not add extra commentary before or after the sections.\n"
         "- Keep the explanation concise and directly tied to the bug.\n"
         "- Keep the verification suggestion specific and practical.\n\n"
+        "- If an input like tick is described as the advance, toggle, or step signal, do not change the transition to use !tick unless the design intent explicitly says so."
         "Return your answer using exactly this format:\n"
         "### Fixed RTL\n"
         "<corrected code>\n\n"
