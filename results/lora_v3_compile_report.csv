@@ -1,0 +1,7 @@
+id,bug_class,sv_path,compile_pass,stdout,stderr
+ex003_fsm_wrong_transition,fsm_bug,results\generated_rtl_v3\ex003_fsm_wrong_transition.sv,True,,
+ex011_edge_detector_blocking,blocking_vs_nonblocking,results\generated_rtl_v3\ex011_edge_detector_blocking.sv,True,,
+ex015_alu_zero_flag_incomplete_comb,incomplete_combinational_logic,results\generated_rtl_v3\ex015_alu_zero_flag_incomplete_comb.sv,True,,
+ex021_reset_missing_data_reg,reset_logic,results\generated_rtl_v3\ex021_reset_missing_data_reg.sv,True,,
+ex025_counter_mod6_wrong_terminal,counter_width_boundary,results\generated_rtl_v3\ex025_counter_mod6_wrong_terminal.sv,True,,
+ex027_uart_tx_fsm_data_to_stop,fsm_bug,results\generated_rtl_v3\ex027_uart_tx_fsm_data_to_stop.sv,True,,

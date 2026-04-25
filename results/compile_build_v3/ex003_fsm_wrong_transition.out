@@ -1,0 +1,123 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2009.vpi";
+S_00000278864163e0 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0000027886416570 .scope module, "traffic_fsm" "traffic_fsm" 3 1;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 1 "rst";
+    .port_info 2 /INPUT 1 "tick";
+    .port_info 3 /OUTPUT 1 "green";
+    .port_info 4 /OUTPUT 1 "red";
+enum000002788641e4d0 .enum4 (2)
+   "S0" 2'b00,
+   "S1" 2'b01
+ ;
+o0000027886466fd8 .functor BUFZ 1, C4<z>; HiZ drive
+v000002788641b230_0 .net "clk", 0 0, o0000027886466fd8;  0 drivers
+v000002788641bae0_0 .var "green", 0 0;
+v000002788641bb80_0 .var "next_state", 1 0;
+v000002788641bc20_0 .var "red", 0 0;
+o0000027886467098 .functor BUFZ 1, C4<z>; HiZ drive
+v000002788641bcc0_0 .net "rst", 0 0, o0000027886467098;  0 drivers
+v000002788641bd60_0 .var "state", 1 0;
+o00000278864670f8 .functor BUFZ 1, C4<z>; HiZ drive
+v00000278864ba510_0 .net "tick", 0 0, o00000278864670f8;  0 drivers
+E_000002788641ca10 .event anyedge, v000002788641bd60_0;
+E_000002788641c390 .event anyedge, v000002788641bd60_0, v00000278864ba510_0;
+E_000002788641c850 .event posedge, v000002788641bcc0_0, v000002788641b230_0;
+    .scope S_0000027886416570;
+T_0 ;
+    %wait E_000002788641c850;
+    %load/vec4 v000002788641bcc0_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.0, 8;
+    %pushi/vec4 0, 0, 2;
+    %assign/vec4 v000002788641bd60_0, 0;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v000002788641bb80_0;
+    %assign/vec4 v000002788641bd60_0, 0;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_0000027886416570;
+T_1 ;
+Ewait_0 .event/or E_000002788641c390, E_0x0;
+    %wait Ewait_0;
+    %load/vec4 v000002788641bd60_0;
+    %store/vec4 v000002788641bb80_0, 0, 2;
+    %load/vec4 v000002788641bd60_0;
+    %dup/vec4;
+    %pushi/vec4 0, 0, 2;
+    %cmp/u;
+    %jmp/1 T_1.0, 6;
+    %dup/vec4;
+    %pushi/vec4 1, 0, 2;
+    %cmp/u;
+    %jmp/1 T_1.1, 6;
+    %jmp T_1.2;
+T_1.0 ;
+    %load/vec4 v00000278864ba510_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_1.3, 8;
+    %pushi/vec4 1, 0, 2;
+    %store/vec4 v000002788641bb80_0, 0, 2;
+T_1.3 ;
+    %jmp T_1.2;
+T_1.1 ;
+    %load/vec4 v00000278864ba510_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_1.5, 8;
+    %pushi/vec4 0, 0, 2;
+    %store/vec4 v000002788641bb80_0, 0, 2;
+T_1.5 ;
+    %jmp T_1.2;
+T_1.2 ;
+    %pop/vec4 1;
+    %jmp T_1;
+    .thread T_1, $push;
+    .scope S_0000027886416570;
+T_2 ;
+Ewait_1 .event/or E_000002788641ca10, E_0x0;
+    %wait Ewait_1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v000002788641bae0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v000002788641bc20_0, 0, 1;
+    %load/vec4 v000002788641bd60_0;
+    %dup/vec4;
+    %pushi/vec4 0, 0, 2;
+    %cmp/u;
+    %jmp/1 T_2.0, 6;
+    %dup/vec4;
+    %pushi/vec4 1, 0, 2;
+    %cmp/u;
+    %jmp/1 T_2.1, 6;
+    %jmp T_2.2;
+T_2.0 ;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v000002788641bae0_0, 0, 1;
+    %jmp T_2.2;
+T_2.1 ;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v000002788641bc20_0, 0, 1;
+    %jmp T_2.2;
+T_2.2 ;
+    %pop/vec4 1;
+    %jmp T_2;
+    .thread T_2, $push;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "C:\Users\huzis\OneDrive\Documents\Projects\AMD-Developer-Hackathon\rtl-repair\results\generated_rtl_v3\ex003_fsm_wrong_transition.sv";
