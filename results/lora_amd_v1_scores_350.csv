@@ -1,0 +1,7 @@
+id,bug_class,fix_correctness,format_adherence,explanation_quality,verification_quality,total_8,notes
+ex003_fsm_wrong_transition,fsm_bug,2,2,2,2,8,"Correct tick-driven FSM repair and good explanation."
+ex011_edge_detector_blocking,blocking_vs_nonblocking,2,2,0,2,6,"RTL fix is correct, but explanation incorrectly claims the bug is missing sig sensitivity in always_ff."
+ex015_alu_zero_flag_incomplete_comb,incomplete_combinational_logic,2,2,2,1,7,"Functionally improves zero assignment, but verification is broad and style is not ideal."
+ex021_reset_missing_data_reg,reset_logic,0,2,1,1,4,"Bad repair. data_out reset is added, but valid_out handling becomes incorrect and split across blocks."
+ex025_counter_mod6_wrong_terminal,counter_width_boundary,2,2,2,2,8,"Correct modulo-6 terminal-count repair."
+ex027_uart_tx_fsm_data_to_stop,fsm_bug,2,2,0,2,6,"RTL fix is correct, but explanation incorrectly focuses on STOP behavior instead of DATA skipping STOP."
