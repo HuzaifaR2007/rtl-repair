@@ -36,3 +36,7 @@ Thumbs.db
 # Environment/secrets
 .env
 *.env
+
+# Compressed model/artifact archives
+*.tar.gz
+*.zip
