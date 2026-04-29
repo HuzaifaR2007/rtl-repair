@@ -29,8 +29,11 @@ def build_prompt(design_intent: str, buggy_rtl: str) -> str:
         "- Do not use markdown code fences.\n"
         "- Do not add extra commentary before or after the sections.\n"
         "- Keep the explanation concise and directly tied to the bug.\n"
-        "- Keep the verification suggestion specific and practical.\n\n"
-        "- If an input like tick is described as the advance, toggle, or step signal, do not change the transition to use !tick unless the design intent explicitly says so."
+        "- Keep the verification suggestion specific and practical.\n"
+        "- If an input like tick is described as the advance, toggle, or step signal, "
+        "do not change the transition to use !tick unless the design intent explicitly says so.\n\n"
+        "- For always_ff sequential logic, do not explain the bug as a missing data-input sensitivity issue unless the design intent explicitly requires combinational behavior.\n"
+        "- For modulo counters, explain off-by-one terminal-count bugs carefully: wrapping at N instead of N-1 usually means the counter includes one extra invalid state.\n"
         "Return your answer using exactly this format:\n"
         "### Fixed RTL\n"
         "<corrected code>\n\n"
@@ -84,7 +87,12 @@ def split_sections(output: str) -> tuple[str, str, str]:
     if verification_match:
         verification = verification_match.group(1).strip()
 
-    fixed = re.sub(r"^```(?:systemverilog|verilog|sv)?\s*", "", fixed, flags=re.IGNORECASE)
+    fixed = re.sub(
+        r"^```(?:systemverilog|verilog|sv)?\s*",
+        "",
+        fixed,
+        flags=re.IGNORECASE,
+    )
     fixed = re.sub(r"\s*```$", "", fixed).strip()
 
     return fixed, explanation, verification
@@ -99,7 +107,7 @@ class RTLRepairDemo:
         self.tokenizer = None
         self.model = None
 
-    def load(self):
+    def load(self) -> None:
         adapter_path = Path(self.adapter_path)
 
         print(f"Loading tokenizer from: {adapter_path}")
@@ -144,7 +152,7 @@ class RTLRepairDemo:
         model_input = build_model_input(prompt, self.tokenizer)
 
         inputs = self.tokenizer(model_input, return_tensors="pt")
-        inputs = {k: v.to(self.model.device) for k, v in inputs.items()}
+        inputs = {key: value.to(self.model.device) for key, value in inputs.items()}
 
         with torch.no_grad():
             output_ids = self.model.generate(
@@ -164,7 +172,7 @@ class RTLRepairDemo:
         return fixed, explanation, verification
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Run RTL Repair Gradio demo.")
     parser.add_argument("--model", type=str, default=DEFAULT_MODEL)
     parser.add_argument("--adapter", type=str, default=DEFAULT_ADAPTER)
@@ -214,6 +222,79 @@ def main():
     assign in_s1 = (state == S1);
 endmodule"""
 
+    preset_examples = [
+        [
+            "Two-state toggle FSM. Reset returns to S0. When tick is high, the FSM toggles between S0 and S1. When tick is low, it holds its current state.",
+            """module toggle_fsm (
+    input logic clk,
+    input logic rst,
+    input logic tick,
+    output logic in_s0,
+    output logic in_s1
+);
+    typedef enum logic {S0, S1} state_t;
+    state_t state, next_state;
+
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst)
+            state <= S0;
+        else
+            state <= next_state;
+    end
+
+    always_comb begin
+        next_state = state;
+        case (state)
+            S0: if (tick) next_state = S1;
+            S1: if (tick) next_state = S1;
+        endcase
+    end
+
+    assign in_s0 = (state == S0);
+    assign in_s1 = (state == S1);
+endmodule""",
+        ],
+        [
+            "2-to-4 combinational decoder with enable. When en is high, exactly one bit of y should be high based on sel. When en is low, y should be 0000.",
+            """module decoder2to4 (
+            input logic en,
+            input logic [1:0] sel,
+            output logic [3:0] y
+);
+            always_comb begin
+                if (en) begin
+                    case (sel)
+                        2'b00: y = 4'b0001;
+                        2'b01: y = 4'b0010;
+                        2'b10: y = 4'b0100;
+                        2'b11: y = 4'b1000;
+                    endcase
+                end
+            end
+        endmodule""",
+        ],
+        [
+            "Modulo-6 counter that counts 0 through 5 when en is high, then wraps to 0. Reset clears the count to zero.",
+            """module mod6_counter (
+    input logic clk,
+    input logic rst,
+    input logic en,
+    output logic [2:0] count
+);
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst)
+            count <= 3'd0;
+        else if (en) begin
+            if (count == 3'd6)
+                count <= 3'd0;
+            else
+                count <= count + 1'b1;
+        end
+    end
+endmodule""",
+        ],
+    ]
+
     with gr.Blocks(title="RTL Repair") as app:
         gr.Markdown(
             "# RTL Repair\n"
@@ -234,6 +315,13 @@ endmodule"""
                     lines=22,
                     value=example_rtl,
                 )
+
+                gr.Examples(
+                    examples=preset_examples,
+                    inputs=[design_intent, buggy_rtl],
+                    label="Preset Examples",
+                )
+
                 max_new_tokens = gr.Slider(
                     minimum=128,
                     maximum=700,
@@ -241,6 +329,7 @@ endmodule"""
                     step=32,
                     label="Max New Tokens",
                 )
+
                 repair_button = gr.Button("Repair RTL")
 
             with gr.Column():
