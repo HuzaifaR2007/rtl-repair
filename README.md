@@ -402,6 +402,25 @@ This checks whether the model output produces syntactically valid SystemVerilog.
 
 ---
 
+## Behavioral Simulation
+
+A targeted behavioral simulation was added for the FSM repair example.
+
+The testbench checks that the generated RTL:
+
+- resets into the expected initial state
+- drives the correct light output for each state
+- advances on `tick`
+- holds state when `tick` is low
+- toggles back correctly on the next `tick`
+
+Result:
+
+```text
+FSM generated RTL passed targeted behavioral simulation.
+
+---
+
 ## Local Setup
 
 Install local dependencies:
