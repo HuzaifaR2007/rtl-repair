@@ -1,0 +1,22 @@
+name,bug_class,rtl,testbench,compile_pass,simulation_pass,stdout,stderr
+traffic_fsm,fsm_bug,results/generated_rtl_v5/ex003_fsm_wrong_transition.sv,testbenches/traffic_fsm_tb.sv,True,True,"PASS: reset starts in S0 / green
+PASS: tick moves S0 to S1 / red
+PASS: tick low holds S1 / red
+PASS: tick moves S1 back to S0 / green
+PASS: tick low holds S0 / green
+ALL TESTS PASSED
+C:\Users\huzis\OneDrive\Documents\Projects\AMD-Developer-Hackathon\rtl-repair\testbenches\traffic_fsm_tb.sv:64: $finish called at 66000 (1ps)",
+mod6_counter,counter_width_boundary,results/generated_rtl_v5/ex025_counter_mod6_wrong_terminal.sv,testbenches/mod6_counter_tb.sv,True,True,"PASS: reset clears count to 0 | count=0
+PASS: enabled count 0 to 1 | count=1
+PASS: enabled count 1 to 2 | count=2
+PASS: enabled count 2 to 3 | count=3
+PASS: enabled count 3 to 4 | count=4
+PASS: enabled count 4 to 5 | count=5
+PASS: wraps from 5 back to 0 | count=0
+PASS: continues after wrap | count=1
+PASS: en low holds count | count=1
+PASS: en low holds count | count=1
+PASS: en low holds count | count=1
+PASS: reset clears count during operation | count=0
+ALL TESTS PASSED
+C:\Users\huzis\OneDrive\Documents\Projects\AMD-Developer-Hackathon\rtl-repair\testbenches\mod6_counter_tb.sv:72: $finish called at 126000 (1ps)",
