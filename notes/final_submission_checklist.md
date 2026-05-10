@@ -2,17 +2,17 @@
 
 ## Required Project Materials
 
-- [ ] GitHub repo is public or accessible
-- [ ] README explains the project clearly
+- [x] GitHub repo is public or accessible
+- [x] README explains the project clearly
 - [ ] Demo app works locally
 - [ ] Demo presets are tested
-- [ ] Dataset files are included
-- [ ] Training/eval scripts are included
-- [ ] Results and score summaries are included
-- [ ] AMD cloud results are documented
-- [ ] Compile checks are documented
-- [ ] Behavioral simulation checks are documented
-- [ ] One-command project check passes
+- [x] Dataset files are included
+- [x] Training/eval scripts are included
+- [x] Results and score summaries are included
+- [x] AMD cloud results are documented
+- [x] Compile checks are documented
+- [x] Behavioral simulation checks are documented
+- [x] One-command project check passes
 
 ## Demo / Submission Assets
 
@@ -21,11 +21,13 @@
 - [ ] Final screenshots prepared
 - [ ] Final project description written
 - [ ] Final pitch summary written
+- [x] Hugging Face Space created
+- [x] LoRA adapter uploaded to Hugging Face
 
 ## Build in Public
 
 - [x] Post #1 completed
-- [ ] Post #2 completed near submission/demo stage
+- [x] Post #2 completed near submission/demo stage
 
 ## Final Technical Checks
 
