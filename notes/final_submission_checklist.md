@@ -31,10 +31,10 @@
 
 ## Final Technical Checks
 
-- [ ] `python scripts/run_project_checks.py` passes
+- [x] `python scripts/run_project_checks.py` passes
 - [ ] Gradio demo launches
 - [ ] FSM preset repairs correctly
 - [ ] Decoder preset repairs correctly
 - [ ] Modulo counter preset repairs correctly
 - [ ] No model artifacts committed to GitHub
-- [ ] `git status` is clean
+- [x] `git status` is clean
