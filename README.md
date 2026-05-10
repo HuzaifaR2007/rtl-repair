@@ -406,8 +406,14 @@ This checks whether the model output produces syntactically valid SystemVerilog.
 
 Targeted behavioral simulations were added for selected generated RTL repairs.
 
-### FSM Repair Simulation
+### Simulation Regression Runner
 
+Behavioral simulations can be run with one command:
+
+```bash
+python scripts/run_simulation_checks.py
+
+### FSM Repair Simulation
 
 
 The FSM testbench checks that the generated RTL:
