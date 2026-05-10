@@ -17,6 +17,12 @@ The goal is not just to make an LLM “write code.” The goal is to specialize 
 
 ---
 
+## Links
+
+- [Hugging Face Space](https://huggingface.co/spaces/Hoooozii/rtl-repair)
+- [LoRA Adapter](https://huggingface.co/Hoooozii/rtl-repair-lora-v5)
+- [GitHub Repository](https://github.com/HuzaifaR2007/rtl-repair)
+
 ## Why This Project Exists
 
 RTL bugs can be annoying because the code may look reasonable while the behavior is completely wrong.
