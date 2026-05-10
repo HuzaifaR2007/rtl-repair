@@ -413,6 +413,30 @@ Behavioral simulations can be run with one command:
 ```bash
 python scripts/run_simulation_checks.py
 
+## One-Command Project Check
+
+The main project checks can be run with:
+
+```bash
+python scripts/run_project_checks.py
+```
+
+This script runs:
+
+- dataset validation
+- formatted data regeneration
+- score summaries when score files are available
+- generated RTL compile checks when V5 outputs are available
+- behavioral simulation regression checks
+
+Expected result:
+
+```text
+All project checks passed.
+```
+
+This is the fastest way to confirm that the repo is in a healthy state.
+
 ### FSM Repair Simulation
 
 
