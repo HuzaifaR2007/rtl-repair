@@ -40,3 +40,7 @@ Thumbs.db
 # Compressed model/artifact archives
 *.tar.gz
 *.zip
+# Generated simulator/build outputs
+results/compile_build*/
+results/sim_build*/
+results/*.out
